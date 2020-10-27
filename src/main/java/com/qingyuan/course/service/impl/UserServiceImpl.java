@@ -26,8 +26,10 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private WeChatUtil weChatUtil;
+
     @Resource
     private UserMessageMapper userMessageMapper;
+
     @Resource
     private TokenUtil tokenutil;
 

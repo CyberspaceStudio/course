@@ -19,4 +19,8 @@ public class Teacher extends User {
      * 教师介绍
      */
     private String teachIntroduction;
+
+
+    public Teacher() {
+    }
 }

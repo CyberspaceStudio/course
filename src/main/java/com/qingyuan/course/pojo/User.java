@@ -45,6 +45,9 @@ public class User {
      */
     private String userImageUrl;
 
+    public User() {
+    }
+
     public User(String openid) {
         this.openid = openid;
     }
