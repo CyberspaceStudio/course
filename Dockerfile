@@ -4,9 +4,9 @@ FROM adoptopenjdk/openjdk11:alpine
 VOLUME /tmp
 ## 将当前目录下的jar包复制到docker容器的/a-course目录下
 ## 若不存在该目录Docker会自动创建该目录
-ADD target/course-0.0.1-SNAPSHOT.jar app.jar
+ADD target/course-0.0.1-SNAPSHOT.jar /a-course/app.jar
 ## 声明服务运行在8080端口
 EXPOSE 8080
 ## 指定docker容器启动时运行jar包 并指定日志输出到
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/a-course/app.jar",">course.log 2>&1 &"]
 
