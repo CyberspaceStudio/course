@@ -8,5 +8,5 @@ ADD target/course-0.0.1-SNAPSHOT.jar /a-course/app.jar
 ## 声明服务运行在8080端口
 EXPOSE 8080
 ## 指定docker容器启动时运行jar包 并指定日志输出到
-ENTRYPOINT ["java","-jar","/a-course/app.jar",">course.log 2>&1 &"]
+ENTRYPOINT ["nohup","java","-jar","/a-course/app.jar"]
 
