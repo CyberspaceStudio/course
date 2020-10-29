@@ -13,8 +13,43 @@
         <result column="user_grade" property="userGrade" jdbcType="VARCHAR"/>
         <result column="user_school" property="userSchool" jdbcType="VARCHAR"/>
     </resultMap>
-
-
-
-
+    <resultMap id="Course" type="com.qingyuan.course.pojo.Course">
+        <id column="course_id" property="courseId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="course_name" property="courseName" jdbcType="VARCHAR"/>
+        <result column="courseStart_day" property="courseStartDay" jdbcType="VARCHAR"/>
+        <result column="courseEnd_day" property="courseEndDay" jdbcType="VARCHAR"/>
+        <result column="course_time" property="courseTime" jdbcType="VARCHAR"/>
+        <result column="courseStu_count" property="courseStuCount" jdbcType="INTEGER"/>
+        <result column="courseApply_count" property="courseApplyCount" jdbcType="INTEGER"/>
+        <result column="course_price" property="coursePrice" jdbcType="DECIMAL"/>
+        <result column="course_times" property="courseTimes" jdbcType="INTEGER"/>
+        <result column="course_label" property="courseLabel" jdbcType="VARCHAR"/>
+        <result column="course_address" property="courseAddress" jdbcType="VARCHAR"/>
+        <result column="course_status" property="courseStatus" jdbcType="INTEGER"/>
+    </resultMap>
+    <insert id="insertApplication">
+        insert into apply_message(course_id,user_id) values (#{courseId},#{userId})
+    </insert>
+    <update id="updateCourseApplyCount">
+            update course_message set
+            courseApply_count = (course_message.courseApply_count +1)
+            where course_id = #{courseId}
+     </update>
+    <update id="updateStudentInfo">
+        update  user_message set
+        user_grade = #{userGrade,jdbcType=VARCHAR},
+        user_school = #{userSchool,jdbcType=VARCHAR}
+        where user_id = #{userId}
+    </update>
+    <select id="selectCourse" parameterType="Integer" resultType="java.lang.Integer">
+        select * from `apply_message` where user_id = #{userId}
+    </select>
+    <select id="getCourse" resultMap="Course">
+        select * from `course_message` where course_id = #{courseId}
+    </select>
+    <select id="getStudent" resultMap="Student">
+        select `user_id`,`user_grade`,`user_school` from `user_message` where user_id = #{userId}
+    </select>
 </mapper>
