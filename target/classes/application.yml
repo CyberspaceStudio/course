@@ -14,4 +14,6 @@ spring:
     password: Gzsnb@666
     url: jdbc:mysql://39.96.114.221:3306/course?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+logging:
+  file:
+    name: D:\JavaProject\course.log

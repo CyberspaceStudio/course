@@ -16,5 +16,4 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 logging:
   file:
-    name: course.log
-    path: /a-course/
+    name: /a-course/course.log
