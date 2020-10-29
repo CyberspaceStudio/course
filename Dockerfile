@@ -2,6 +2,7 @@
 FROM adoptopenjdk/openjdk11:alpine
 ## VOLUME 指向了一个/tmp的目录，由于 Spring Boot 使用内置的Tomcat容器，Tomcat 默认使用/tmp作为工作目录。这个命令的效果是：在宿主机的/var/lib/docker目录下创建一个临时文件并把它链接到容器中的/tmp目录
 VOLUME /tmp
+VOLUME /a-course:/a-course
 ## 将当前目录下的jar包复制到docker容器的/a-course目录下
 ## 若不存在该目录Docker会自动创建该目录
 ADD target/course-0.0.1-SNAPSHOT.jar app.jar
