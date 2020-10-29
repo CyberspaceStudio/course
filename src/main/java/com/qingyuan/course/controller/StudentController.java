@@ -23,17 +23,16 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+
     /**
      * 报名课程
-     *
-     * @param stuId 学生id
      * @param courseId
+     * @param userId 学生id
      * @return
      */
     @PostMapping("/apply")
     public UniversalResponseBody applyCourse(Integer courseId, Integer userId) {
-        Course course = this.studentService.applyCourse(courseId, userId);
-        return new UniversalResponseBody(1, "课程报名成功", course);
+        return studentService.applyCourse(courseId, userId);
     }
 
     /**
