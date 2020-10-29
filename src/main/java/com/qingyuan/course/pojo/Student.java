@@ -1,5 +1,6 @@
 package com.qingyuan.course.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -19,4 +20,13 @@ public class Student extends User {
      * 用户学校
      */
     private String userSchool;
+
+
+    public Student() {
+        super();
+    }
+
+    public Student(String openid) {
+        super(openid);
+    }
 }

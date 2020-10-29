@@ -29,7 +29,7 @@ public interface StudentService {
      * @param userId
      * @return 已报课程信息
      */
-    Course applyCourse(Integer courseId, Integer userId);
+    UniversalResponseBody<Course> applyCourse(Integer courseId, Integer userId);
 
     /**
      * 修改信息并返回

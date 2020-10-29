@@ -1,0 +1,16 @@
+language: java
+sudo: required
+branches:
+  only:
+    - main
+jdk:
+  - openjdk11
+services:
+- docker
+before_install:
+  - chmod +x ./mvnw
+script:
+  - mvn clean package -Dmaven.test.skip=true
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker image build ./ -t xdqingyuan/course-server:latest
+  - docker image push xdqingyuan/course-server:latest
