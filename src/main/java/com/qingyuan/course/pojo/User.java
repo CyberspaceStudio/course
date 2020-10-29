@@ -44,8 +44,10 @@ public class User {
      * 用户头像
      */
     private String userImageUrl;
+
     public User() {
     }
+
     public User(String openid) {
         this.openid = openid;
     }

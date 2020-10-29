@@ -10,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class StudentServiceImpl implements StudentService {
-    @Autowired
+
+    @Resource
     private StuMessageMapper stuMessageMapper;
 
     @Override
@@ -30,11 +32,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Course applyCourse(Integer courseId, Integer userId) {
+    public UniversalResponseBody<Course> applyCourse(Integer courseId, Integer userId) {
         this.stuMessageMapper.insertApplication(courseId, userId);
         this.stuMessageMapper.updateCourseApplyCount(courseId);
         Course course = this.stuMessageMapper.getCourse(courseId).get(0);
-        return course;
+        return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),course);
     }
 
     @Override
