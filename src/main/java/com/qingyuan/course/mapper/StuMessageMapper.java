@@ -20,7 +20,7 @@ public interface StuMessageMapper {
 
     List<Integer> selectCourse(Integer userId);
 
-    List<Course> getCourse(Integer courseId);
+    Course getCourse(Integer courseId);
 
-    List<Student> getStudent(Integer userId);
+    Student getStudent(Integer userId);
 }

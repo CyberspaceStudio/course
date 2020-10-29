@@ -32,7 +32,7 @@ public class StudentController {
      */
     @PostMapping("/apply")
     public UniversalResponseBody applyCourse(Integer courseId, Integer userId) {
-        return studentService.applyCourse(courseId, userId);
+        return this.studentService.applyCourse(courseId, userId);
     }
 
     /**
@@ -43,8 +43,7 @@ public class StudentController {
      */
     @GetMapping("/applyEd")
     public UniversalResponseBody<List<Course>> applyEdCourses(Integer userId) {
-        List<Course> courseList = this.studentService.applyEdCourse(userId);
-        return new UniversalResponseBody<List<Course>>(1, "查询成功", courseList);
+        return this.studentService.applyEdCourse(userId);
     }
 
     /**
@@ -57,7 +56,6 @@ public class StudentController {
      */
     @PostMapping("/change")
     public UniversalResponseBody<Student> updateStudentMessage(Integer userId, String userGrade, String userSchool) {
-        Student student = this.studentService.changeStudentInfo(userId, userGrade, userSchool);
-        return new UniversalResponseBody<Student>(1, "修改信息成功", student);
+        return this.studentService.changeStudentInfo(userId, userGrade, userSchool);
     }
 }

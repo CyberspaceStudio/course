@@ -20,7 +20,7 @@ public interface StudentService {
      * @param userId
      * @return 所报课程信息
      */
-    List<Course> applyEdCourse(Integer userId);
+    UniversalResponseBody<List<Course>> applyEdCourse(Integer userId);
 
     /**
      * 报名课程
@@ -29,7 +29,9 @@ public interface StudentService {
      * @param userId
      * @return 已报课程信息
      */
+
     UniversalResponseBody<Course> applyCourse(Integer courseId, Integer userId);
+
 
     /**
      * 修改信息并返回
@@ -38,5 +40,5 @@ public interface StudentService {
      * @param userSchool
      * @return 该学生信息
      */
-    Student changeStudentInfo(Integer userId, String userGrade, String userSchool);
+    UniversalResponseBody<Student> changeStudentInfo(Integer userId, String userGrade, String userSchool);
 }

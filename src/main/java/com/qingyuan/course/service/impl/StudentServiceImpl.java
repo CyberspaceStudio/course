@@ -22,28 +22,27 @@ public class StudentServiceImpl implements StudentService {
     private StuMessageMapper stuMessageMapper;
 
     @Override
-    public List<Course> applyEdCourse(Integer userId) {
+    public UniversalResponseBody<List<Course>> applyEdCourse(Integer userId) {
         List<Course> courseList = new ArrayList();
         List<Integer> courseIdList = this.stuMessageMapper.selectCourse(userId);
         for (Integer courseId : courseIdList) {
-            courseList.add(this.stuMessageMapper.getCourse(courseId).get(0));
+            courseList.add(this.stuMessageMapper.getCourse(courseId));
         }
-        //测试
-        return courseList;
+        return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),courseList);
     }
 
     @Override
     public UniversalResponseBody<Course> applyCourse(Integer courseId, Integer userId) {
         this.stuMessageMapper.insertApplication(courseId, userId);
         this.stuMessageMapper.updateCourseApplyCount(courseId);
-        Course course = this.stuMessageMapper.getCourse(courseId).get(0);
+        Course course = this.stuMessageMapper.getCourse(courseId);
         return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),course);
     }
 
     @Override
-    public Student changeStudentInfo(Integer userId, String userGrade, String userSchool) {
+    public UniversalResponseBody<Student> changeStudentInfo(Integer userId, String userGrade, String userSchool) {
         this.stuMessageMapper.updateStudentInfo(userId, userGrade, userSchool);
-        Student student = this.stuMessageMapper.getStudent(userId).get(0);
-        return student;
+        Student student = this.stuMessageMapper.getStudent(userId);
+        return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),student);
     }
 }
