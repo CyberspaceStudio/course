@@ -28,6 +28,7 @@ public class StudentServiceImpl implements StudentService {
         for (Integer courseId : courseIdList) {
             courseList.add(this.stuMessageMapper.getCourse(courseId).get(0));
         }
+        //测试
         return courseList;
     }
 
