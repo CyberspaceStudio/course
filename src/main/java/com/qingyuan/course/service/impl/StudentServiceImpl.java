@@ -1,0 +1,46 @@
+package com.qingyuan.course.service.impl;
+
+import com.qingyuan.course.enums.ResponseResultEnum;
+import com.qingyuan.course.mapper.StuMessageMapper;
+import com.qingyuan.course.pojo.Course;
+import com.qingyuan.course.pojo.Student;
+import com.qingyuan.course.service.StudentService;
+import com.qingyuan.course.utils.UniversalResponseBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+@Transactional
+public class StudentServiceImpl implements StudentService {
+    @Autowired
+    private StuMessageMapper stuMessageMapper;
+
+    @Override
+    public List<Course> applyEdCourse(Integer userId) {
+        List<Course> courseList = new ArrayList();
+        List<Integer> courseIdList = this.stuMessageMapper.selectCourse(userId);
+        for (Integer courseId : courseIdList) {
+            courseList.add(this.stuMessageMapper.getCourse(courseId).get(0));
+        }
+        return courseList;
+    }
+
+    @Override
+    public Course applyCourse(Integer courseId, Integer userId) {
+        this.stuMessageMapper.insertApplication(courseId, userId);
+        this.stuMessageMapper.updateCourseApplyCount(courseId);
+        Course course = this.stuMessageMapper.getCourse(courseId).get(0);
+        return course;
+    }
+
+    @Override
+    public Student changeStudentInfo(Integer userId, String userGrade, String userSchool) {
+        this.stuMessageMapper.updateStudentInfo(userId, userGrade, userSchool);
+        Student student = this.stuMessageMapper.getStudent(userId).get(0);
+        return student;
+    }
+}
