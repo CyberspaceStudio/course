@@ -44,12 +44,12 @@
         where user_id = #{userId}
     </update>
     <select id="selectCourse" parameterType="Integer" resultType="java.lang.Integer">
-        select * from `apply_message` where user_id = #{userId}
+        select course_id from apply_message where user_id = #{userId}
     </select>
     <select id="getCourse" resultMap="Course">
-        select * from `course_message` where course_id = #{courseId}
+        select course_id,course_name,user_name from course_message where course_id = #{courseId}
     </select>
     <select id="getStudent" resultMap="Student">
-        select `user_id`,`user_grade`,`user_school` from `user_message` where user_id = #{userId}
+        select user_id,user_grade,user_school from user_message where user_id = #{userId}
     </select>
 </mapper>
