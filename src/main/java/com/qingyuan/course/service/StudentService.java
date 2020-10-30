@@ -30,7 +30,7 @@ public interface StudentService {
      * @return 已报课程信息
      */
 
-    UniversalResponseBody<Course> applyCourse(Integer courseId, Integer userId);
+    UniversalResponseBody<?> applyCourse(Integer courseId, Integer userId);
 
 
     /**

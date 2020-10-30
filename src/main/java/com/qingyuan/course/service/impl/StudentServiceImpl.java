@@ -6,7 +6,6 @@ import com.qingyuan.course.pojo.Course;
 import com.qingyuan.course.pojo.Student;
 import com.qingyuan.course.service.StudentService;
 import com.qingyuan.course.utils.UniversalResponseBody;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,29 +19,45 @@ public class StudentServiceImpl implements StudentService {
 
     @Resource
     private StuMessageMapper stuMessageMapper;
-
+    //查询已选课程
     @Override
     public UniversalResponseBody<List<Course>> applyEdCourse(Integer userId) {
-        List<Course> courseList = new ArrayList();
-        List<Integer> courseIdList = this.stuMessageMapper.selectCourse(userId);
-        for (Integer courseId : courseIdList) {
-            courseList.add(this.stuMessageMapper.getCourse(courseId));
+        try {
+            List<Course> courseList = new ArrayList();
+            List<Integer> courseIdList = this.stuMessageMapper.selectCourse(userId);
+            for (Integer courseId : courseIdList) {
+                courseList.add(this.stuMessageMapper.getCourse(courseId));
+            }
+            return new UniversalResponseBody<List<Course>>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),courseList);
+        } catch (Exception e) {
+            return new UniversalResponseBody<>(ResponseResultEnum.FAILED.getCode(),ResponseResultEnum.FAILED.getMsg());
         }
-        return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),courseList);
     }
-
+    //选择课程
     @Override
-    public UniversalResponseBody<Course> applyCourse(Integer courseId, Integer userId) {
-        this.stuMessageMapper.insertApplication(courseId, userId);
-        this.stuMessageMapper.updateCourseApplyCount(courseId);
-        Course course = this.stuMessageMapper.getCourse(courseId);
-        return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),course);
+    public UniversalResponseBody<?> applyCourse(Integer courseId, Integer userId) {
+        try {
+            List<Integer> courseIdList = this.stuMessageMapper.selectCourse(userId);
+            if(courseIdList.contains(courseId)){
+                return new UniversalResponseBody<String>(ResponseResultEnum.FAILED.getCode(),ResponseResultEnum.FAILED.getMsg(),"课程已选择");
+            }
+            this.stuMessageMapper.insertApplication(courseId, userId);
+            this.stuMessageMapper.updateCourseApplyCount(courseId);
+            Course course = this.stuMessageMapper.getCourse(courseId);
+            return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),course);
+        } catch (Exception e) {
+            return new UniversalResponseBody<>(ResponseResultEnum.FAILED.getCode(),ResponseResultEnum.FAILED.getMsg());
+        }
     }
-
+    //更改学生信息
     @Override
     public UniversalResponseBody<Student> changeStudentInfo(Integer userId, String userGrade, String userSchool) {
-        this.stuMessageMapper.updateStudentInfo(userId, userGrade, userSchool);
-        Student student = this.stuMessageMapper.getStudent(userId);
-        return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),student);
+        try {
+            this.stuMessageMapper.updateStudentInfo(userId, userGrade, userSchool);
+            Student student = this.stuMessageMapper.getStudent(userId);
+            return new UniversalResponseBody<>(ResponseResultEnum.SUCCESS.getCode(),ResponseResultEnum.SUCCESS.getMsg(),student);
+        } catch (Exception e) {
+            return new UniversalResponseBody<>(ResponseResultEnum.FAILED.getCode(),ResponseResultEnum.FAILED.getMsg());
+        }
     }
 }
