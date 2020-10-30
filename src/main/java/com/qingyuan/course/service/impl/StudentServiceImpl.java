@@ -28,8 +28,12 @@ public class StudentServiceImpl implements StudentService {
         for (Integer courseId : courseIdList) {
             courseList.add(this.stuMessageMapper.getCourse(courseId).get(0));
         }
+        if(true)
+            return null;
         //test
         return courseList;
+
+
     }
 
     @Override
