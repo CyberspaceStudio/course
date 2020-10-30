@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         //Code无效
         if (wxResponseInfo.getErrcode() != null) {
             //将微信返回错误代码及结果记录到日志中
-            log.error("微信登录出错自动更新测试 code:" + code + wxResponseInfo.getErrcode() + "\t" + wxResponseInfo.getErrmsg());
+            log.error("微信登录出错自动更新测试2021 code:" + code + wxResponseInfo.getErrcode() + "\t" + wxResponseInfo.getErrmsg());
             return new UniversalResponseBody(ResponseResultEnum.CODE_IS_INVALID.getCode(), ResponseResultEnum.CODE_IS_INVALID.getMsg());
         }
         String token = null;
