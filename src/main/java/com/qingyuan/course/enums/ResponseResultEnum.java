@@ -24,8 +24,15 @@ public enum ResponseResultEnum {
     USER_NO_TOKEN(0, "token为空"),
     USER_NO_PERMISSION(0, "用户权限不足"),
     CODE_IS_INVALID(0, "wx-code无效"),
-    USER_LOGIN_SUCCESS(1, "登录成功");
+    USER_LOGIN_SUCCESS(1, "登录成功"),
 
+    /**
+     * 课程错误
+     */
+    COURSE_ADD_FAILED(0, "课程添加失败"),
+    COURSE_IS_EXISTED(0, "课程已存在"),
+    COURSE_NOT_EXISTED(0, "不存在该课程"),
+    COURSE_STATUS_CHANGE_FAILED(0, "更改课程状态失败");
 
     /**
      * 返回结果代码

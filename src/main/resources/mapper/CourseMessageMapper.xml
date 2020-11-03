@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qingyuan.course.mapper.CourseMessageMapper">
+    <resultMap id="Course" type="com.qingyuan.course.pojo.Course">
+        <id column="course_id" property="courseId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="course_name" property="courseName" jdbcType="VARCHAR"/>
+        <result column="courseStart_day" property="courseStartDay" jdbcType="VARCHAR"/>
+        <result column="courseEnd_day" property="courseEndDay" jdbcType="VARCHAR"/>
+        <result column="course_time" property="courseTime" jdbcType="VARCHAR"/>
+        <result column="courseStu_count" property="courseStuCount" jdbcType="INTEGER"/>
+        <result column="courseApply_count" property="courseApplyCount" jdbcType="INTEGER"/>
+        <result column="course_price" property="coursePrice" jdbcType="DECIMAL"/>
+        <result column="course_times" property="courseTimes" jdbcType="INTEGER"/>
+        <result column="course_label" property="courseLabel" jdbcType="VARCHAR"/>
+        <result column="course_address" property="courseAddress" jdbcType="VARCHAR"/>
+        <result column="course_status" property="courseStatus" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="addCourse" parameterType="Course" useGeneratedKeys="true" keyProperty="courseId">
+        insert into course.course_message (course_id, user_id, user_name, course_name, courseStart_day, courseEnd_day, course_time, courseStu_count, courseApply_count, course_price, course_times, course_label, course_address, course_status)
+        values (#{courseId}, #{userId}, #{userName}, #{courseName}, #{courseStartDay}, #{courseEndDay}, #{courseTime}, #{courseStuCount}, #{courseApplyCount}, #{coursePrice}, #{courseTimes}, #{courseLabel}, #{courseAddress}, #{courseStatus})
+    </insert>
+
+    <update id="changeCourseStatus" parameterType="int">
+        update course.course_message set course_status=#{courseStatus} where course_id=#{courseId}
+    </update>
+
+    <select id="getCourseById" resultMap="Course">
+        select * from course.course_message where course_id=#{courseId}
+    </select>
+</mapper>
