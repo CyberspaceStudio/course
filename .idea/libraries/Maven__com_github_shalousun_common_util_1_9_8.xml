@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.shalousun:common-util:1.9.8">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/shalousun/common-util/1.9.8/common-util-1.9.8.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/shalousun/common-util/1.9.8/common-util-1.9.8-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/shalousun/common-util/1.9.8/common-util-1.9.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
